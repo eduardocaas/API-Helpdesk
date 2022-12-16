@@ -13,7 +13,7 @@ public enum Prioridade {
 		this.descricao = descricao;
 	}
 
-	public static Prioridade toEnum(Integer cod) {
+	public static Prioridade toEnum(Integer cod) { // Chamado automaticamente
 		
 		if (cod == null) 
 		{
