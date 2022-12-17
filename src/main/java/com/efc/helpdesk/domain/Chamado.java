@@ -40,7 +40,7 @@ public class Chamado implements Serializable {
 	private Tecnico tecnico;
 	
 	@ManyToOne
-	@JoinColumn(name = "cliente _id")
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
 	public Chamado() {
