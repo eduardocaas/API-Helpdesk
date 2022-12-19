@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.efc.helpdesk.domain.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -13,6 +14,7 @@ public class Tecnico extends Pessoa {
 
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore // Ao realizar busca por GET, JSON ignora o campo chamados, evitar problema de serialização (entrar em loop)
 	@OneToMany(mappedBy = "tecnico")
 	private List<Chamado> chamados = new ArrayList<>();
 
