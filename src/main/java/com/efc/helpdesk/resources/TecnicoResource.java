@@ -1,5 +1,6 @@
 package com.efc.helpdesk.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.efc.helpdesk.domain.Tecnico;
 import com.efc.helpdesk.domain.dtos.TecnicoDTO;
@@ -39,6 +43,14 @@ public class TecnicoResource {
 		List<TecnicoDTO> listDto = list.stream().map(obj -> new TecnicoDTO(obj)).collect(Collectors.toList()); // Converte cada obj Tecnico para TecnicoDTO
 		return ResponseEntity.ok().body(listDto);
 		
+	}
+	
+	@PostMapping
+	public ResponseEntity<TecnicoDTO> create(@RequestBody TecnicoDTO objDTO){ // No corpo da requisição deve vir um técnico DTO 
+		
+		Tecnico newObj = service.create(objDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 	
 }
