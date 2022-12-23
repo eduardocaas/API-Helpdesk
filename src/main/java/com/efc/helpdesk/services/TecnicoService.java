@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.efc.helpdesk.domain.Tecnico;
 import com.efc.helpdesk.repositories.TecnicoRepository;
+import com.efc.helpdesk.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class TecnicoService {
@@ -17,7 +18,7 @@ public class TecnicoService {
 	public Tecnico findById(Integer id) { // TecnicoRepository retorna um Optional (findById -> JPA)
 		
 		Optional<Tecnico> obj = repository.findById(id); // Optional -> pode encontrar ou não no banco
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
 	}
 	
 }
