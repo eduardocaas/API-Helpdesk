@@ -1,5 +1,8 @@
 package com.efc.helpdesk.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +30,15 @@ public class TecnicoResource {
 		
 		Tecnico obj = service.findById(id);
 		return ResponseEntity.ok().body(new TecnicoDTO(obj)); // Retorna o objeto no corpo da resposta
+	}
+	
+	@GetMapping  // Chamado se não for passado nenhum paramêtro na URL
+	public ResponseEntity<List<TecnicoDTO>> findAll(){
+		
+		List<Tecnico> list = service.findAll();
+		List<TecnicoDTO> listDto = list.stream().map(obj -> new TecnicoDTO(obj)).collect(Collectors.toList()); // Converte cada obj Tecnico para TecnicoDTO
+		return ResponseEntity.ok().body(listDto);
+		
 	}
 	
 }

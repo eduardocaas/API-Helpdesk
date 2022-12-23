@@ -17,7 +17,7 @@ public class ResourceExceptionHandler {
 		
 		StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), "Object Not Found", ex.getMessage(), request.getRequestURI());
 		
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error); // Caso objeto não encontrado, ao corpo da resposta é passada a exceção em extenso
 		
 	}
 	
