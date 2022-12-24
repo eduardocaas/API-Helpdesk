@@ -10,14 +10,20 @@ import com.efc.helpdesk.domain.Tecnico;
 import com.efc.helpdesk.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotNull;
+
 public class TecnicoDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	protected Integer id;
+	@NotNull(message = "O campo NOME é requerido") // (DefaultMessage)
 	protected String nome;
+	@NotNull(message = "O campo CPF é requerido")
 	protected String cpf;
+	@NotNull(message = "O campo EMAIL é requerido")
 	protected String email;
+	@NotNull(message = "O campo SENHA é requerido")
 	protected String senha;
 	protected Set<Integer> perfis = new HashSet<>(); // pega apenas o número do perfil
 	

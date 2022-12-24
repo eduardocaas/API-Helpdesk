@@ -18,6 +18,8 @@ import com.efc.helpdesk.domain.Tecnico;
 import com.efc.helpdesk.domain.dtos.TecnicoDTO;
 import com.efc.helpdesk.services.TecnicoService;
 
+import jakarta.validation.Valid;
+
 // Intercepta requisições HTTP e envia para camada de service -> que faz conexão com o banco
 
 @RestController
@@ -46,7 +48,7 @@ public class TecnicoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TecnicoDTO> create(@RequestBody TecnicoDTO objDTO){ // No corpo da requisição deve vir um técnico DTO 
+	public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO objDTO){ // No corpo da requisição deve vir um técnico DTO 
 		
 		Tecnico newObj = service.create(objDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
