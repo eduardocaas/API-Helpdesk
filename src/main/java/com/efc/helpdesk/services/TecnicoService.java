@@ -45,12 +45,25 @@ public class TecnicoService {
 	}
 	
 	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
+		
 		objDTO.setId(id);
 		Tecnico oldObj = findById(id); // Verifica de id existe
 		validaPorCpfEEmail(objDTO); 
 		oldObj = new Tecnico(objDTO);
 		return repository.save(oldObj);
 		
+	}
+	
+	public void delete(Integer id) {
+		
+		Tecnico obj = findById(id);
+		
+		if(obj.getChamados().size() > 0) {
+			throw new DataIntegrityViolationException("Técnico possui ordens de serviço em aberto e não pode ser deletado!");			
+		}
+		
+		repository.deleteById(id);
+	
 	}
 
 	private void validaPorCpfEEmail(TecnicoDTO objDTO) {
@@ -65,8 +78,5 @@ public class TecnicoService {
 			throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
 		}
 		
-	}
-
-	
-	
+	}	
 }
