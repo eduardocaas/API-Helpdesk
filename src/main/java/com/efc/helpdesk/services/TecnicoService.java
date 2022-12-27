@@ -14,6 +14,8 @@ import com.efc.helpdesk.repositories.TecnicoRepository;
 import com.efc.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.efc.helpdesk.services.exceptions.ObjectNotFoundException;
 
+import jakarta.validation.Valid;
+
 @Service
 public class TecnicoService {
 
@@ -41,6 +43,15 @@ public class TecnicoService {
 		return repository.save(newObj);
 		
 	}
+	
+	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
+		objDTO.setId(id);
+		Tecnico oldObj = findById(id); // Verifica de id existe
+		validaPorCpfEEmail(objDTO); 
+		oldObj = new Tecnico(objDTO);
+		return repository.save(oldObj);
+		
+	}
 
 	private void validaPorCpfEEmail(TecnicoDTO objDTO) {
 		
@@ -55,5 +66,7 @@ public class TecnicoService {
 		}
 		
 	}
+
+	
 	
 }
