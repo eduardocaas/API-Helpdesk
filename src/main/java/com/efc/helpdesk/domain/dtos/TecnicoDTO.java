@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.efc.helpdesk.domain.Tecnico;
 import com.efc.helpdesk.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -20,6 +22,7 @@ public class TecnicoDTO implements Serializable {
 	@NotNull(message = "O campo NOME é requerido") // (DefaultMessage)
 	protected String nome;
 	@NotNull(message = "O campo CPF é requerido")
+	@CPF
 	protected String cpf;
 	@NotNull(message = "O campo EMAIL é requerido")
 	protected String email;
