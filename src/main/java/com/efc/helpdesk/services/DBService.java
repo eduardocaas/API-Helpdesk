@@ -3,6 +3,7 @@ package com.efc.helpdesk.services;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.efc.helpdesk.domain.Chamado;
@@ -27,19 +28,22 @@ public class DBService {
 	@Autowired
 	private ChamadoRepository chamadoRepository;
 
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
 	public void instanciaDB() {
 		
-		Tecnico tec1 = new Tecnico(null, "Fulano", "042.173.380-23" , "fulano@email.com", "abc123");
+		Tecnico tec1 = new Tecnico(null, "Fulano", "042.173.380-23" , "fulano@email.com", encoder.encode("abc123"));
 		tec1.addPerfil(Perfil.ADMIN);
-		Tecnico tec2 = new Tecnico(null, "Ciclano", "998.332.660-45" , "ciclano@email.com", "OIhQwI");
-		Tecnico tec3 = new Tecnico(null, "Maria", "621.433.020-10" , "maria@email.com", "a2KDCm");
-		Tecnico tec4 = new Tecnico(null, "Ana", "031.196.700-06" , "ana@email.com", "op4lks");
+		Tecnico tec2 = new Tecnico(null, "Ciclano", "998.332.660-45" , "ciclano@email.com", encoder.encode("OIhQwI"));
+		Tecnico tec3 = new Tecnico(null, "Maria", "621.433.020-10" , "maria@email.com", encoder.encode("a2KDCm"));
+		Tecnico tec4 = new Tecnico(null, "Ana", "031.196.700-06" , "ana@email.com", encoder.encode("op4lks"));
 		
 		
-		Cliente cli1 = new Cliente(null, "Beltrano", "298.070.940-97", "beltrano@email.com", "bel123trano");
-		Cliente cli2 = new Cliente(null, "Jorge", "748.230.360-00", "jorge@email.com", "zobtk0");
-		Cliente cli3 = new Cliente(null, "Pedro", "209.380.940-09", "pedro@email.com", "y6wdy5");
-		Cliente cli4 = new Cliente(null, "Luis", "421.108.470-42", "luis@email.com", "vh7d34");
+		Cliente cli1 = new Cliente(null, "Beltrano", "298.070.940-97", "beltrano@email.com", encoder.encode("bel123trano"));
+		Cliente cli2 = new Cliente(null, "Jorge", "748.230.360-00", "jorge@email.com", encoder.encode("zobtk0"));
+		Cliente cli3 = new Cliente(null, "Pedro", "209.380.940-09", "pedro@email.com", encoder.encode("y6wdy5"));
+		Cliente cli4 = new Cliente(null, "Luis", "421.108.470-42", "luis@email.com", encoder.encode("vh7d34"));
 		
 		Chamado c1 = new Chamado(null, Prioridade.MEDIA, Status.ANDAMENTO, "Chamado 01", "Primeiro chamado", tec1, cli1);
 		Chamado c2 = new Chamado(null, Prioridade.ALTA, Status.ANDAMENTO, "Chamado 02", "Segundo chamado", tec2, cli3);

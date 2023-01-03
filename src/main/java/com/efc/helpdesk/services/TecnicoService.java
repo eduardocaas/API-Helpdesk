@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.efc.helpdesk.domain.Pessoa;
@@ -25,6 +26,9 @@ public class TecnicoService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
 	public Tecnico findById(Integer id) { // TecnicoRepository retorna um Optional (findById -> JPA)
 		
 		Optional<Tecnico> obj = repository.findById(id); // Optional -> pode encontrar ou não no banco
@@ -38,6 +42,7 @@ public class TecnicoService {
 	public Tecnico create(TecnicoDTO objDTO) {
 		
 		objDTO.setId(null); // Assegurar que ID virá nulo, para evitar update em ID já existente
+		objDTO.setSenha(encoder.encode(objDTO.getSenha())); // Codificação de senha
 		validaPorCpfEEmail(objDTO);
 		Tecnico newObj = new Tecnico(objDTO);
 		return repository.save(newObj);
