@@ -42,6 +42,7 @@ public class ClienteService {
 	public Cliente create(ClienteDTO objDTO) {
 		
 		objDTO.setId(null); // Assegurar que ID virá nulo, para evitar update em ID já existente
+		objDTO.setSenha(encoder.encode(objDTO.getSenha()));
 		validaPorCpfEEmail(objDTO);
 		Cliente newObj = new Cliente(objDTO);
 		return repository.save(newObj);
