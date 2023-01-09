@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.efc.helpdesk.domain.Chamado;
@@ -29,11 +30,11 @@ public class DBService {
 	private ChamadoRepository chamadoRepository;
 
 	@Autowired
-	private BCryptPasswordEncoder encoder;
+	private PasswordEncoder encoder;
 	
 	public void instanciaDB() {
 		
-		Tecnico tec1 = new Tecnico(null, "Fulano", "042.173.380-23" , "fulano@email.com", encoder.encode("abc123"));
+		Tecnico tec1 = new Tecnico(null, "Fulano", "042.173.380-23" , "fulano@email.com", encoder.encode("123"));
 		tec1.addPerfil(Perfil.ADMIN);
 		Tecnico tec2 = new Tecnico(null, "Ciclano", "998.332.660-45" , "ciclano@email.com", encoder.encode("OIhQwI"));
 		Tecnico tec3 = new Tecnico(null, "Maria", "621.433.020-10" , "maria@email.com", encoder.encode("a2KDCm"));
