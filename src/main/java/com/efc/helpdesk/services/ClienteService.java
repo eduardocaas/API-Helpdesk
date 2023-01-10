@@ -3,19 +3,19 @@ package com.efc.helpdesk.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.efc.helpdesk.domain.Pessoa;
 import com.efc.helpdesk.domain.Cliente;
+import com.efc.helpdesk.domain.Pessoa;
 import com.efc.helpdesk.domain.dtos.ClienteDTO;
-import com.efc.helpdesk.repositories.PessoaRepository;
 import com.efc.helpdesk.repositories.ClienteRepository;
+import com.efc.helpdesk.repositories.PessoaRepository;
 import com.efc.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.efc.helpdesk.services.exceptions.ObjectNotFoundException;
-
-import jakarta.validation.Valid;
 
 @Service
 public class ClienteService {

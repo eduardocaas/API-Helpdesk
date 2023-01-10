@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,8 +21,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.efc.helpdesk.domain.Tecnico;
 import com.efc.helpdesk.domain.dtos.TecnicoDTO;
 import com.efc.helpdesk.services.TecnicoService;
-
-import jakarta.validation.Valid;
 
 // Intercepta requisições HTTP e envia para camada de service -> que faz conexão com o banco
 
